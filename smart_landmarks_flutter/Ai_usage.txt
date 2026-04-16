@@ -1,0 +1,40 @@
+# AI Usage Documentation - Smart Landmarks (Flutter)
+
+## AI Tools Used
+- AI coding assistant for code generation guidance and architecture suggestions
+
+## How AI Was Used
+
+### 1. Architecture Planning
+- Used AI to discuss Provider pattern suitability for this Flutter project
+- AI suggested service layer pattern for separating API and database logic
+- Decision to use flutter_map (OpenStreetMap) over google_maps_flutter was AI-assisted
+
+### 2. Code Generation Assistance
+- AI helped generate boilerplate code for SQLite database setup
+- HTTP client setup with correct Content-Type headers for different endpoints
+- Provider (ChangeNotifier) implementation for state management
+
+### 3. Problem Solving
+- AI helped debug the multipart form-data vs JSON body type issue for create_landmark endpoint
+- GPS permission handling and fallback strategies
+- Score-based marker color calculation using Color.lerp
+- Robust JSON parsing to handle server returning numbers as strings
+
+### 4. What I Wrote Myself
+- UI design and widget tree structure
+- Business logic flow (filtering, sorting, offline queue)
+- Error handling and user feedback
+- Integration testing with Postman before implementation
+
+### 5. Learning Outcomes
+- Better understanding of Provider pattern in Flutter
+- Learned offline-first architecture with SQLite
+- Understood difference between multipart/form-data and application/json request bodies
+- Improved knowledge of Flutter plugins (geolocator, image_picker, flutter_map)
+
+## AI Usage Policy Compliance
+- AI was used as a learning and productivity tool, not for blind copy-paste
+- All generated code was reviewed, understood, and modified as needed
+- The overall architecture and design decisions were made by the student
+- AI did not have access to classmates' code or solutions

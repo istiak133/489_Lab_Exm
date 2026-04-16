@@ -1,0 +1,122 @@
+{
+  "info": {
+    "name": "CSE489 Smart Landmarks API",
+    "_postman_id": "cse489-collection-001",
+    "description": "API collection for Smart Landmarks with student key support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://your-server/api.php"
+    },
+    {
+      "key": "student_key",
+      "value": "A"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Landmarks",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}?action=get_landmarks&key={{student_key}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "action", "value": "get_landmarks" },
+            { "key": "key", "value": "{{student_key}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Visit Landmark",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"landmark_id\": 1,\n  \"user_lat\": 23.8103,\n  \"user_lon\": 90.4125\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}?action=visit_landmark&key={{student_key}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "action", "value": "visit_landmark" },
+            { "key": "key", "value": "{{student_key}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Landmark",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "title", "value": "Test Landmark", "type": "text" },
+            { "key": "lat", "value": "23.75", "type": "text" },
+            { "key": "lon", "value": "90.39", "type": "text" },
+            {
+              "key": "image",
+              "type": "file",
+              "src": ""
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?action=create_landmark&key={{student_key}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "action", "value": "create_landmark" },
+            { "key": "key", "value": "{{student_key}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Delete Landmark (Soft)",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "id", "value": "1", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?action=delete_landmark&key={{student_key}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "action", "value": "delete_landmark" },
+            { "key": "key", "value": "{{student_key}}" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Restore Landmark",
+      "request": {
+        "method": "POST",
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "id", "value": "1", "type": "text" }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}?action=restore_landmark&key={{student_key}}",
+          "host": ["{{base_url}}"],
+          "query": [
+            { "key": "action", "value": "restore_landmark" },
+            { "key": "key", "value": "{{student_key}}" }
+          ]
+        }
+      }
+    }
+  ]
+}
