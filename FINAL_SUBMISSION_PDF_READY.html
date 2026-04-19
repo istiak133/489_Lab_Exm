@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Landmarks - Final Submission</title>
+  <style>
+    :root {
+      --text: #111111;
+      --muted: #555555;
+      --line: #d9d9d9;
+      --accent: #1e3a8a;
+    }
+
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Times New Roman", Times, serif;
+      line-height: 1.4;
+      background: #ffffff;
+    }
+
+    .page {
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 30px;
+      letter-spacing: 0.3px;
+    }
+
+    h2 {
+      margin-top: 14px;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    h3 {
+      margin-top: 18px;
+      font-size: 18px;
+      color: #000000;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 15px;
+      text-align: justify;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+      font-size: 15px;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    .cover-wrap {
+      min-height: calc(297mm - 36mm);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    .meta-table th,
+    .meta-table td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .meta-table th {
+      width: 34%;
+      background: #f7f7f7;
+    }
+
+    .section-title {
+      margin-top: 16px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-note {
+      margin-top: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover-wrap">
+    <div class="center">
+      <h1>Smart Landmarks (Flutter)</h1>
+      <p class="subtitle">CSE 489 Lab Exam - Final Submission Report</p>
+    </div>
+
+    <table class="meta-table" aria-label="Submission Cover Details">
+      <tr><th>Student Name</th><td>Istiak Ahmed</td></tr>
+      <tr><th>Student ID</th><td>24141210</td></tr>
+      <tr><th>Section</th><td>01</td></tr>
+      <tr><th>Course</th><td>CSE489 (App Development)</td></tr>
+      <tr><th>Assessment</th><td>Lab Exam</td></tr>
+      <tr><th>Project Title</th><td>Smart Landmarks</td></tr>
+      <tr><th>Submission Date</th><td>April 19, 2026</td></tr>
+    </table>
+
+    <p class="small center">Prepared for formal academic submission.</p>
+  </section>
+
+  <section class="page">
+    <h2>1. Project Overview</h2>
+    <p>
+      Smart Landmarks is a Flutter-based mobile application for managing geo-tagged landmarks through a REST API.
+      Users can browse landmarks in map and list views, submit visits using live GPS location, add landmarks with
+      image upload, and continue key actions in offline conditions through local persistence and delayed synchronization.
+    </p>
+
+    <h2 class="section-title">2. Features Implemented</h2>
+    <ul>
+      <li>Landmark retrieval from remote API and display in map and list interfaces.</li>
+      <li>Score-based sorting and minimum-score filtering support.</li>
+      <li>Interactive OpenStreetMap integration via flutter_map.</li>
+      <li>Visit workflow with device GPS capture and server-calculated distance.</li>
+      <li>Create landmark endpoint integration with multipart image upload.</li>
+      <li>Soft delete and restore operations for landmarks.</li>
+      <li>Local visit history tracking with time and distance.</li>
+      <li>SQLite cache for offline landmark access.</li>
+      <li>Pending visit queue for offline actions.</li>
+      <li>Automatic sync of pending actions after connectivity returns.</li>
+    </ul>
+
+    <h2 class="section-title">3. API Usage</h2>
+    <p><strong>Base URL:</strong> https://labs.anontech.info/cse489/exm3/api.php</p>
+    <p><strong>Authentication:</strong> Query parameter key=24141210 in all requests.</p>
+    <ul>
+      <li><strong>GET action=get_landmarks</strong>: Retrieves all landmarks for map and list rendering.</li>
+      <li><strong>POST action=visit_landmark</strong>: Submits user visit with JSON body containing landmark_id, user_lat, and user_lon.</li>
+      <li><strong>POST action=create_landmark</strong>: Creates a landmark with title, lat, lon, and image using multipart/form-data.</li>
+      <li><strong>POST action=delete_landmark</strong>: Soft-deletes a landmark by id using form-data.</li>
+      <li><strong>POST action=restore_landmark</strong>: Restores a soft-deleted landmark by id using form-data.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Offline Strategy</h2>
+    <ul>
+      <li>Landmark data is cached in SQLite for offline browsing.</li>
+      <li>Offline visit actions are inserted into pending_visits queue.</li>
+      <li>Pending queue is reprocessed automatically on app startup or refresh when network is available.</li>
+      <li>Local visit history remains available even without connectivity.</li>
+      <li>Network state transitions are observed with connectivity_plus.</li>
+    </ul>
+
+    <h2 class="section-title">5. Architecture Used</h2>
+    <ul>
+      <li><strong>State Layer:</strong> Provider with ChangeNotifier.</li>
+      <li><strong>Service Layer:</strong> ApiService (network) and DatabaseService (SQLite).</li>
+      <li><strong>Data Layer:</strong> Model classes for landmark, visit history, and pending visit.</li>
+      <li><strong>Presentation Layer:</strong> Feature-based Flutter screens and widgets.</li>
+    </ul>
+    <ul>
+      <li>Separation of concerns between UI, state logic, API communication, and persistence.</li>
+      <li>Offline-first fallback design for unstable network environments.</li>
+      <li>Reusable services for maintainability and extension.</li>
+    </ul>
+
+    <h2 class="section-title">6. Challenges Faced</h2>
+    <ul>
+      <li>Managing multiple request body types across endpoints: JSON, form-data, and multipart/form-data.</li>
+      <li>Designing robust offline queue and replay logic without data loss.</li>
+      <li>Preventing duplicate visit submission during delayed synchronization.</li>
+      <li>Handling GPS permissions and location availability edge cases.</li>
+      <li>Keeping map marker color logic consistent with dynamic score values.</li>
+      <li>Safely parsing variable backend response structures.</li>
+    </ul>
+
+    <p class="footer-note">
+      This report is prepared as the final submission document for the CSE489 (App Development) Lab Exam.
+    </p>
+  </section>
+</body>
+</html>

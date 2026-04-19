@@ -1,3 +1,14 @@
+UNIVERSITY SUBMISSION COVER
+---------------------------
+Student Name   : Istiak Ahmed
+Student ID     : 24141210
+Section        : 01
+Course         : CSE489 (App Development)
+Assessment     : CSE 489 Lab Exam
+Project Title  : Smart Landmarks (Flutter)
+Submission Date: April 19, 2026
+---------------------------
+
 Smart Landmarks (Flutter)
 CSE 489 Lab Exam - Final Submission
 
