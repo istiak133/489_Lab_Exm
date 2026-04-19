@@ -8,7 +8,7 @@
 | Course | CSE489 (App Development) |
 | Assessment | CSE 489 Lab Exam |
 | Project Title | Smart Landmarks (Flutter) |
-| Submission Date | April 19, 2026 |
+| Submission Date | April 15, 2026 |
 
 ---
 
@@ -20,7 +20,7 @@
 - ID: 24141210
 - Section: 01
 - Course: CSE489 (App Development)
-- Submission Date: April 19, 2026
+- Submission Date: April 15, 2026
 
 ## 1. Project Overview
 Smart Landmarks is a Flutter-based mobile application for managing geo-tagged landmarks through a REST API. Users can view landmarks in map and list formats, submit visits with live GPS coordinates, add landmarks with images, and continue key operations during offline conditions using local storage and deferred sync.
