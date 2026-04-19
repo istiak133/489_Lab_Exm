@@ -1,18 +1,17 @@
+Smart Landmarks (Flutter)
+CSE 489 Lab Exam - Final Submission
 
-# Smart Landmarks (Flutter)
-## CSE 489 Lab Exam - Final Submission
-
-### Student Information
+Student Information
 - Name: Istiak Ahmed
 - ID: 24141210
 - Section: 01
 - Course: CSE489 (App Development)
 - Submission Date: April 19, 2026
 
-## 1. Project Overview
+1. Project Overview
 Smart Landmarks is a Flutter-based mobile application for managing geo-tagged landmarks through a REST API. Users can view landmarks in map and list formats, submit visits with live GPS coordinates, add landmarks with images, and continue key operations during offline conditions using local storage and deferred sync.
 
-## 2. Features Implemented
+2. Features Implemented
 - Fetch and display landmarks from the remote API.
 - Show landmarks on OpenStreetMap using flutter_map.
 - Score-based sorting and minimum-score filtering in landmark list.
@@ -24,7 +23,7 @@ Smart Landmarks is a Flutter-based mobile application for managing geo-tagged la
 - Pending visit queue for offline actions.
 - Auto-sync of queued visits when internet connectivity is restored.
 
-## 3. API Usage
+3. API Usage
 - Base URL: https://labs.anontech.info/cse489/exm3/api.php
 - Authentication Strategy: All requests include query parameter key=24141210.
 
@@ -48,14 +47,14 @@ Endpoints used:
   Purpose: Restore soft-deleted landmark by id.
   Body Type: form-data
 
-## 4. Offline Strategy
+4. Offline Strategy
 - Local Cache: Landmark API data is stored in SQLite table landmarks.
 - Offline Queue: Visit actions made without internet are stored in pending_visits.
 - Deferred Synchronization: Pending visits are retried automatically on refresh/startup when network becomes available.
 - Local Continuity: Cached landmarks and visit history remain available offline.
 - Connectivity Detection: connectivity_plus is used to monitor network state.
 
-## 5. Architecture Used
+5. Architecture Used
 - State Management: Provider with ChangeNotifier.
 - Service Layer: ApiService for network operations and DatabaseService for SQLite operations.
 - Data Layer: Model classes for landmark, visit history, and pending visit.
@@ -66,7 +65,7 @@ Architectural style followed:
 - Offline-first fallback path for network failures.
 - Reusable service classes for maintainability and easier extension.
 
-## 6. Challenges Faced
+6. Challenges Faced
 - Handling multiple payload formats (JSON, multipart/form-data, and form-data) across endpoints.
 - Designing reliable offline queue logic without losing visit actions.
 - Avoiding duplicate submission during delayed sync.
